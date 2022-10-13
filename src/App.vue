@@ -53,6 +53,8 @@ export default {
         description: this.description,
       }
       this.posts.push(newPost);
+      this.title = '';
+      this.description = '';
     },
   },
 }
