@@ -4,13 +4,15 @@
       <div><strong>Название:</strong> {{ post.title }}</div>
       <div><strong>Описание:</strong> {{ post.description }}</div>
     </div>
-    <div class="post__btns">Удалить</div>
+    <my-button class="post__btns">Удалить</my-button>
   </div>
 </template>
 
 <script>
+import MyButton from "@/components/UI/MyButton";
 export default {
   name: "PostItem",
+  components: {MyButton},
   props: {
     post: {
       type: Object,
