@@ -28,14 +28,7 @@ export default {
   },
   methods: {
     createPost() {
-      const newPost = {
-        id: Date.now(),
-        title: this.title,
-        description: this.description,
-      }
-      this.posts.push(newPost);
-      this.title = '';
-      this.description = '';
+
     },
   },
 }

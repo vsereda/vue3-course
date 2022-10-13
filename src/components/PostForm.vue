@@ -2,21 +2,20 @@
   <form @submit.prevent>
     <h4>Создание поста</h4>
     <input
-        v-bind:value="post.title"
-        @input="post.title = $event.target.value"
+        v-model="post.title"
         class="input"
         type="text"
         placeholder="Название"
     >
     <input
-        v-bind:value="post.description"
-        @input="post.description = $event.target.value"
+        v-model="post.description"
         class="input"
         type="text"
         placeholder="Описание"
     >
     <button
         class="btn"
+        @click="CreatePost"
     >
       Создать
     </button>
@@ -33,6 +32,19 @@ export default {
         description: '',
       },
     }
+  },
+  methods: {
+    CreatePost() {
+      this.post.id = Date.now()
+      const newPost = {
+        id: Date.now(),
+        title: this.title,
+        description: this.description,
+      }
+      this.posts.push(newPost);
+      this.title = '';
+      this.description = '';
+    },
   },
 }
 </script>
