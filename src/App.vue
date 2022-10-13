@@ -1,16 +1,11 @@
 <template>
   <div>
-    <div class="post">
-      <div><strong>Название:</strong> Пост о JavaScript</div>
-      <div><strong>Описание:</strong> Пост о Джеесе</div>
+    <div>
+
     </div>
-    <div class="post">
-      <div><strong>Название:</strong> Пост о JavaScript</div>
-      <div><strong>Описание:</strong> Пост о Джеесе</div>
-    </div>
-    <div class="post">
-      <div><strong>Название:</strong> Пост о JavaScript</div>
-      <div><strong>Описание:</strong> Пост о Джеесе</div>
+    <div class="post" v-for="post in posts">
+      <div><strong>Название:</strong> {{ post.title }}</div>
+      <div><strong>Описание:</strong> {{ post.description }}</div>
     </div>
   </div>
 </template>
@@ -24,6 +19,7 @@ export default {
         { id: 1, title: 'JavaScript', description: 'Описание JavaScript' },
         { id: 2, title: 'PHP', description: 'Описание PHP' },
         { id: 3, title: 'MySql', description: 'Описание MySql' },
+        { id: 4, title: 'Python', description: 'Описание Python' },
       ]
     }
   },
