@@ -1,12 +1,8 @@
 <template>
   <div>
-    <div>
-      <button @click="addLike">Like</button>
-      <button @click="addDisLike">Dislike</button>
-    </div>
-    <div>
-      Количество лайков <strong>{{ likes }}</strong>
-      Количество дизлайков <strong>{{ dislikes }}</strong>
+    <div class="post">
+      <div><strong>Название:</strong> Пост о JavaScript</div>
+      <div><strong>Название:</strong> Пост о PHP</div>
     </div>
   </div>
 </template>
@@ -21,10 +17,10 @@ export default {
     }
   },
   methods: {
-    addLike(){
+    addLike() {
       this.likes += 1;
     },
-    addDisLike(){
+    addDisLike() {
       this.dislikes += 1;
     },
   },
