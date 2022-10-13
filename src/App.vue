@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <post-form></post-form>
-    <post-list></post-list>
+    <post-list :posts="posts"></post-list>
   </div>
 </template>
 

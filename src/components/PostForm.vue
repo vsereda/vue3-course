@@ -2,15 +2,15 @@
   <form @submit.prevent>
     <h4>Создание поста</h4>
     <input
-        v-bind:value="title"
-        @input="title = $event.target.value"
+        v-bind:value="post.title"
+        @input="post.title = $event.target.value"
         class="input"
         type="text"
         placeholder="Название"
     >
     <input
-        v-bind:value="description"
-        @input="description = $event.target.value"
+        v-bind:value="post.description"
+        @input="post.description = $event.target.value"
         class="input"
         type="text"
         placeholder="Описание"
@@ -28,14 +28,10 @@ export default {
   name: "PostForm",
   data() {
     return {
-      // posts: [
-      //   {id: 1, title: 'JavaScript', description: 'Описание JavaScript'},
-      //   {id: 2, title: 'PHP', description: 'Описание PHP'},
-      //   {id: 3, title: 'MySql', description: 'Описание MySql'},
-      //   {id: 4, title: 'Python', description: 'Описание Python'},
-      // ],
-      // title: '',
-      // description: '',
+      post: {
+        title: '',
+        description: '',
+      },
     }
   },
 }
