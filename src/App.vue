@@ -1,8 +1,8 @@
 <template>
   <div>
     <div>
-      <button>Like</button>
-      <button>Dislike</button>
+      <button @click="addLike">Like</button>
+      <button @click="addDisLike">Dislike</button>
     </div>
     <div>
       Количество лайков <strong>{{ likes }}</strong>
@@ -17,9 +17,17 @@ export default {
   data() {
     return {
       likes: 0,
-      dislikes: 5,
+      dislikes: 0,
     }
-  }
+  },
+  methods: {
+    addLike(){
+      this.likes += 1;
+    },
+    addDisLike(){
+      this.dislikes += 1;
+    },
+  },
 }
 </script>
 
