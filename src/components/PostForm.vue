@@ -36,14 +36,11 @@ export default {
   methods: {
     CreatePost() {
       this.post.id = Date.now()
-      const newPost = {
-        id: Date.now(),
-        title: this.title,
-        description: this.description,
+      this.$emit('create', this.post, '2', '3')
+      this.post = {
+        title: '',
+        description: '',
       }
-      this.posts.push(newPost);
-      this.title = '';
-      this.description = '';
     },
   },
 }

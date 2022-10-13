@@ -1,7 +1,14 @@
 <template>
   <div class="app">
-    <post-form></post-form>
-    <post-list :posts="posts"></post-list>
+    <post-form
+        @create="createPost"
+    >
+    </post-form>
+    <post-list
+        :posts="posts"
+    >
+
+    </post-list>
   </div>
 </template>
 
@@ -22,13 +29,11 @@ export default {
         {id: 3, title: 'MySql', description: 'Описание MySql'},
         {id: 4, title: 'Python', description: 'Описание Python'},
       ],
-      title: '',
-      description: '',
     }
   },
   methods: {
-    createPost() {
-
+    createPost(post) {
+      this.posts.push(post)
     },
   },
 }
