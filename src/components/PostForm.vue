@@ -7,7 +7,7 @@
         placeholder="Название"
     ></my-input>
     <my-input
-        v-model="post.description"
+        v-model="post.body"
         type="text"
         placeholder="Описание"
     ></my-input>
@@ -30,7 +30,7 @@ export default {
     return {
       post: {
         title: '',
-        description: '',
+        body: '',
       },
     }
   },
@@ -40,7 +40,7 @@ export default {
       this.$emit('create', this.post, '2', '3')
       this.post = {
         title: '',
-        description: '',
+        body: '',
       }
     },
   },

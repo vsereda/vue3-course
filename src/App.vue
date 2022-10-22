@@ -22,20 +22,18 @@
 <script>
 import PostForm from "@/components/PostForm";
 import PostList from "@/components/PostList";
+import axios from 'axios';
+import MyButton from "@/components/UI/MyButton";
 
 export default {
   name: "App",
   components: {
+    MyButton,
     PostList, PostForm,
   },
   data() {
     return {
-      posts: [
-        {id: 1, title: 'JavaScript', description: 'Описание JavaScript'},
-        {id: 2, title: 'PHP', description: 'Описание PHP'},
-        {id: 3, title: 'MySql', description: 'Описание MySql'},
-        {id: 4, title: 'Python', description: 'Описание Python'},
-      ],
+      posts: [],
       dialogVisible: false,
     }
   },
@@ -49,6 +47,14 @@ export default {
     },
     showDialog() {
       this.dialogVisible = true;
+    },
+    async fetchPosts() {
+      try {
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+        this.posts = response.data;
+      } catch (e) {
+        alert('Ошибочка')
+      }
     },
   },
 }
