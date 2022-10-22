@@ -50,13 +50,18 @@ export default {
     },
     async fetchPosts() {
       try {
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
-        this.posts = response.data;
+        setTimeout(async () => {
+          const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+          this.posts = response.data;
+        }, 3000);
       } catch (e) {
         alert('Ошибочка')
       }
     },
   },
+  mounted() {
+    this.fetchPosts();
+  }
 }
 </script>
 
