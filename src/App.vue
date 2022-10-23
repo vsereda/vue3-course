@@ -24,6 +24,15 @@
     >
     </post-list>
     <div v-else>Идет загрузка...</div>
+    <div class="page__wrapper">
+      <div
+          v-for="page in totlalPages"
+          :key="page"
+          class="page"
+      >
+        {{ page }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -48,12 +57,15 @@ export default {
       posts: [],
       dialogVisible: false,
       isPostsLoading: false,
+      limit: 10,
+      page: 1,
       searchQuery: '',
       selectedSort: '',
       sortOptions: [
         {value: 'title', name: 'Поназванию'},
         {value: 'body', name: 'По содержанию'},
       ],
+      totlalPages: 0,
     }
   },
   methods: {
@@ -70,7 +82,13 @@ export default {
     async fetchPosts() {
       try {
         this.isPostsLoading = true;
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+          params: {
+            _page: this.page,
+            _limit: this.limit,
+          }
+        });
+        this.totlalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
         this.posts = response.data;
       } catch (e) {
         alert('Ошибочка')
@@ -110,4 +128,15 @@ export default {
   justify-content: space-between;
   margin: 15px 0;
 }
+
+.page__wrapper {
+  display: flex;
+  margin-top: 15px;
+}
+
+.page {
+  border: 1px solid black;
+  padding: 10px;
+}
+
 </style>
