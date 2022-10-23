@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <h1>Страница с постами</h1>
-    <my-input v-model="searchQuery" placeholder="Поиск... " />
+    <my-input v-model="searchQuery" placeholder="Поиск... "/>
     <div class="app__btns">
       <my-button @click="showDialog">
         Создать посьт
@@ -24,20 +24,20 @@
     >
     </post-list>
     <div v-else>Идет загрузка...</div>
-    <div class="observer"></div>
-<!--    <div class="page__wrapper">-->
-<!--      <div-->
-<!--          v-for="pageNumber in totlalPages"-->
-<!--          :key="pageNumber"-->
-<!--          class="page"-->
-<!--          :class="{-->
-<!--            'current-page': pageNumber === page-->
-<!--          }"-->
-<!--          @click="changePage(pageNumber)"-->
-<!--      >-->
-<!--        {{ pageNumber }}-->
-<!--      </div>-->
-<!--    </div>-->
+    <div ref="observer" class="observer"></div>
+    <!--    <div class="page__wrapper">-->
+    <!--      <div-->
+    <!--          v-for="pageNumber in totlalPages"-->
+    <!--          :key="pageNumber"-->
+    <!--          class="page"-->
+    <!--          :class="{-->
+    <!--            'current-page': pageNumber === page-->
+    <!--          }"-->
+    <!--          @click="changePage(pageNumber)"-->
+    <!--      >-->
+    <!--        {{ pageNumber }}-->
+    <!--      </div>-->
+    <!--    </div>-->
   </div>
 </template>
 
@@ -106,7 +106,7 @@ export default {
     },
     async loadMorePosts() {
       try {
-        this.isPostsLoading = true;
+        this.page += 1;
         const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
           params: {
             _page: this.page,
@@ -117,8 +117,6 @@ export default {
         this.posts = [...this.posts, ...response.data];
       } catch (e) {
         alert('Ошибочка')
-      } finally {
-        this.isPostsLoading = false;
       }
     },
   },
@@ -130,11 +128,14 @@ export default {
       threshold: 1.0
     }
 
-    const callback = function (entries, observe) {
-
+    const callback = (entries, observe) => {
+      if (entries[0].isIntersecting && this.page < this.totlalPages) {
+        this.loadMorePosts()
+      }
     }
 
     const observer = new IntersectionObserver(callback, options);
+    observer.observe(this.$refs.observer);
   },
   computed: {
     sortedPosts() {
