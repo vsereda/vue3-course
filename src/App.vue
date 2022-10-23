@@ -26,11 +26,15 @@
     <div v-else>Идет загрузка...</div>
     <div class="page__wrapper">
       <div
-          v-for="page in totlalPages"
-          :key="page"
+          v-for="pageNumber in totlalPages"
+          :key="pageNumber"
           class="page"
+          :class="{
+            'current-page': pageNumber === page
+          }"
+          @click="changePage(pageNumber)"
       >
-        {{ page }}
+        {{ pageNumber }}
       </div>
     </div>
   </div>
@@ -79,6 +83,9 @@ export default {
     showDialog() {
       this.dialogVisible = true;
     },
+    changePage(pageNumber) {
+      this.page = pageNumber
+    },
     async fetchPosts() {
       try {
         this.isPostsLoading = true;
@@ -108,7 +115,11 @@ export default {
       return this.sortedPosts.filter(post => post.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
     },
   },
-  watch: {},
+  watch: {
+    page() {
+      this.fetchPosts()
+    }
+  },
 }
 </script>
 
@@ -139,4 +150,7 @@ export default {
   padding: 10px;
 }
 
+.current-page {
+  border: 2px solid teal;
+}
 </style>
